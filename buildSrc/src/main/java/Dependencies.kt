@@ -41,6 +41,10 @@ object Versions {
     const val junit = "4.13.2"
     const val extJunit = "1.1.5"
     const val espresso = "3.5.1"
+    const val googleTruth = "1.1.3"
+    const val mockito = "5.2.0"
+    const val mockitoInline = "5.2.0"
+    const val kotlinMockito = "4.1.0"
 }
 
 object Android {
@@ -67,6 +71,10 @@ object Tests {
     const val junit = "junit:junit:${Versions.junit}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
+    const val googleTruth = "com.google.truth:truth:${Versions.googleTruth}"
+    const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
+    const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockitoInline}"
+    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.kotlinMockito}"
 }
 
 object Koin {

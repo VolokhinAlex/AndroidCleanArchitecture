@@ -72,6 +72,10 @@ dependencies {
 
     testImplementation Koin.koinTest
     testImplementation Tests.junit
+    testImplementation Tests.mockito
+    testImplementation Tests.mockitoKotlin
+    testImplementation Tests.mockitoInline
+    testImplementation Tests.googleTruth
     androidTestImplementation Tests.extJunit
     androidTestImplementation Tests.espresso
 }
