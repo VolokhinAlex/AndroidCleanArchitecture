@@ -23,6 +23,6 @@ class MainViewModel(
 
     fun isShowingEvaluationWindow(count: Long) {
         _isShowingEvaluationWindow.value =
-            launchCounterInteractor.isShowEvaluationWindow(value = count)
+            launchCounterInteractor.isShowEvaluationWindow(launchCount = count)
     }
 }

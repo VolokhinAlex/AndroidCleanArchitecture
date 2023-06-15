@@ -31,7 +31,7 @@ class TestingLaunchCounter {
     @Test
     fun `checking the correct saving of startup data`() {
         val dataForSave = mock<DataLaunchCount>()
-        doNothing().`when`(launchCounterRepository).saveLaunchCount(value = dataForSave)
+        doNothing().`when`(launchCounterRepository).saveLaunchCount(launchCount = dataForSave)
         launchCounterInteractor.saveLaunchCount(dataLaunchCount = dataForSave)
         verify(launchCounterRepository, atLeastOnce()).saveLaunchCount(dataForSave)
     }
