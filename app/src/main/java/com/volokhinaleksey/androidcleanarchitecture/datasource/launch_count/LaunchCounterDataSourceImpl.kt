@@ -1,4 +1,4 @@
-package com.volokhinaleksey.androidcleanarchitecture.datasource
+package com.volokhinaleksey.androidcleanarchitecture.datasource.launch_count
 
 import com.volokhinaleksey.androidcleanarchitecture.managers.StorageManager
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount

@@ -19,7 +19,12 @@ android {
             useSupportLibrary true
         }
     }
-
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
+        def apiKey = properties.getProperty("photos_api_key", "")
+        it.buildConfigField "String", "PHOTOS_API_KEY", "\"" + apiKey + "\""
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -47,6 +52,11 @@ android {
 }
 
 dependencies {
+    // Retrofit
+    implementation Retrofit.retrofit
+    implementation Retrofit.loggingOkHttp
+    implementation Retrofit.converterGson
+
     // Koin
     implementation Koin.koinCore
     implementation Koin.koinAndroid
@@ -67,9 +77,7 @@ dependencies {
     implementation Compose.composeViewModel
     implementation Compose.composeLiveData
 
-
     // Tests
-
     testImplementation Koin.koinTest
     testImplementation Tests.junit
     testImplementation Tests.mockito
