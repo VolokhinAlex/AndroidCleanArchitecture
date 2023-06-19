@@ -7,6 +7,12 @@ class SearchDataSourceImpl(
     private val apiHolder: ApiHolder
 ) : SearchDataSource {
 
+    /**
+     * A method for searching for photos on request.
+     * @param token - Token for authorization on the server
+     * @param query - The request for which you need to find a photo
+     */
+
     override suspend fun searchPhoto(token: String, query: String): SearchPhotosDTO {
         return apiHolder.photosApiService.searchPhoto(token = token, query = query)
     }
