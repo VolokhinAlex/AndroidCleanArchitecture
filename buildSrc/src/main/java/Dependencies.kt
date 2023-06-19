@@ -32,8 +32,9 @@ object Versions {
 
     // Compose
     const val activityCompose = "1.7.0"
-    const val composeBom = "2022.10.00"
+    const val composeBom = "2022.12.00"
     const val composeViewModel = "2.5.1"
+    const val composeMaterial3 = "1.1.0-alpha06"
 
     // Koin
     const val koinCore = "3.3.3"
@@ -50,6 +51,9 @@ object Versions {
     const val mockito = "5.2.0"
     const val mockitoInline = "5.2.0"
     const val kotlinMockito = "4.1.0"
+
+    // Coil
+    const val coilCompose = "2.2.2"
 }
 
 object Retrofit {
@@ -62,6 +66,10 @@ object Android {
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktxCore}"
 }
 
+object Coil {
+    const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
+}
+
 object Compose {
     const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
     const val composeBom = "androidx.compose:compose-bom:${Versions.composeBom}"
@@ -69,7 +77,7 @@ object Compose {
     const val composeUIUtil = "androidx.compose.ui:ui-util"
     const val composeUiGraphics = "androidx.compose.ui:ui-graphics"
     const val composePreview = "androidx.compose.ui:ui-tooling-preview"
-    const val composeMaterial = "androidx.compose.material3:material3"
+    const val composeMaterial = "androidx.compose.material3:material3:${Versions.composeMaterial3}"
     const val composeUiTestJunit = "androidx.compose.ui:ui-test-junit4"
     const val composeUiTooling = "androidx.compose.ui:ui-tooling"
     const val composeTestManifest = "androidx.compose.ui:ui-test-manifest"

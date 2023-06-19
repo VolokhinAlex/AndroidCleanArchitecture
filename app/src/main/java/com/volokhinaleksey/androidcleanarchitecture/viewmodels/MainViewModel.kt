@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.volokhinaleksey.androidcleanarchitecture.BuildConfig
 import com.volokhinaleksey.androidcleanarchitecture.interactors.launch_count.LaunchCounterInteractor
 import com.volokhinaleksey.androidcleanarchitecture.interactors.photos.PhotosInteractor
+import com.volokhinaleksey.androidcleanarchitecture.interactors.search.SearchPhotoInteractor
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
 import com.volokhinaleksey.androidcleanarchitecture.models.PhotosResponseState
 import com.volokhinaleksey.androidcleanarchitecture.viewmodels.base.BaseViewModel
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val launchCounterInteractor: LaunchCounterInteractor,
     private val photosInteractor: PhotosInteractor,
+    private val searchPhotoInteractor: SearchPhotoInteractor,
     private val dispatcher: CoroutineDispatcher
 ) : BaseViewModel<DataLaunchCount>() {
 
@@ -50,6 +52,19 @@ class MainViewModel(
                 orderBy = orderBy
             )
             _photos.postValue(PhotosResponseState.Success(photos = responseResult))
+        }
+    }
+
+    fun searchPhoto(query: String) {
+        _photos.value = PhotosResponseState.Loading
+        viewModelScope.launch(dispatcher + CoroutineExceptionHandler { _, throwable ->
+            _photos.postValue(PhotosResponseState.Error(throwable.localizedMessage.orEmpty()))
+        }) {
+            val searchResult = searchPhotoInteractor.searchPhoto(
+                token = "Client-ID ${BuildConfig.PHOTOS_API_KEY}",
+                query = query
+            )
+            _photos.postValue(PhotosResponseState.Success(photos = searchResult))
         }
     }
 

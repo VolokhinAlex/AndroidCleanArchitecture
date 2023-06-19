@@ -52,6 +52,9 @@ android {
 }
 
 dependencies {
+    // Coil
+    implementation Coil.coilCompose
+
     // Retrofit
     implementation Retrofit.retrofit
     implementation Retrofit.loggingOkHttp
