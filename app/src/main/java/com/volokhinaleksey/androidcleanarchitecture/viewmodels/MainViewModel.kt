@@ -27,18 +27,39 @@ class MainViewModel(
     private val _photos: MutableLiveData<PhotosResponseState> = MutableLiveData()
     val photos: LiveData<PhotosResponseState> get() = _photos
 
+    /**
+     * Method for saving the number of app launches
+     * @param count - Number of app launches
+     */
+
     fun saveLaunchCount(count: DataLaunchCount) {
         launchCounterInteractor.saveLaunchCount(dataLaunchCount = count)
     }
+
+    /**
+     * Method for getting the number of app launches
+     */
 
     fun getLaunchCount() {
         mutableData.value = launchCounterInteractor.getLaunchCount()
     }
 
+    /**
+     * Method for determining whether to show the application evaluation window or not
+     * @param count - The number of app launches to check whether the evaluation window needs to be shown
+     */
+
     fun isShowingEvaluationWindow(count: Long) {
         _isShowingEvaluationWindow.value =
             launchCounterInteractor.isShowEvaluationWindow(launchCount = count)
     }
+
+    /**
+     * Method for getting a list of photos
+     * @param page - The page to get
+     * @param perPage - Number of items per page
+     * @param orderBy - Sort the receipt of photos by some request
+     */
 
     fun getPhotos(page: Int, perPage: Int, orderBy: String = "") {
         _photos.value = PhotosResponseState.Loading
@@ -54,6 +75,11 @@ class MainViewModel(
             _photos.postValue(PhotosResponseState.Success(photos = responseResult))
         }
     }
+
+    /**
+     * Method for searching photos by request
+     * @param query - The request for which you want to get a list of photos.
+     */
 
     fun searchPhoto(query: String) {
         _photos.value = PhotosResponseState.Loading

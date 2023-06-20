@@ -28,6 +28,12 @@ interface PhotoApiService {
         @Query("order_by") orderBy: String
     ): List<PhotoDTO>
 
+    /**
+     * Method for getting photos using search
+     * @param token - Key for authorization on the server
+     * @param query - The request for which you need to find photos.
+     */
+
     @GET("search/photos")
     suspend fun searchPhoto(
         @Header("Authorization") token: String,
