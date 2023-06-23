@@ -32,12 +32,13 @@ import com.volokhinaleksey.androidcleanarchitecture.ui.theme.AndroidCleanArchite
 import com.volokhinaleksey.androidcleanarchitecture.viewmodels.MainViewModel
 import kotlinx.coroutines.delay
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by inject()
+    private val mainViewModel: MainViewModel by viewModel()
 
     private val imageLoader: ImageLoader by inject()
 
@@ -45,7 +46,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.getLaunchCount()
-        mainViewModel.getPhotos(page = 1, perPage = 100)
         setContent {
             AndroidCleanArchitectureTheme {
                 // A surface container using the 'background' color from the theme

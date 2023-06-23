@@ -27,6 +27,10 @@ class MainViewModel(
     private val _photos: MutableLiveData<PhotosResponseState> = MutableLiveData()
     val photos: LiveData<PhotosResponseState> get() = _photos
 
+    init {
+        getPhotos(page = 1, perPage = 100)
+    }
+
     /**
      * Method for saving the number of app launches
      * @param count - Number of app launches
