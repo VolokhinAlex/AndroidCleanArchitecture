@@ -1,7 +1,7 @@
-package com.volokhinaleksey.androidcleanarchitecture.interactors
+package com.volokhinaleksey.androidcleanarchitecture.interactors.launch_count
 
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
-import com.volokhinaleksey.androidcleanarchitecture.repositories.LaunchCounterRepository
+import com.volokhinaleksey.androidcleanarchitecture.repositories.launch_count.LaunchCounterRepository
 
 class LaunchCounterInteractorImpl(
     private val repository: LaunchCounterRepository

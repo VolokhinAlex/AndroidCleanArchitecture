@@ -13,9 +13,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
+import com.volokhinaleksey.androidcleanarchitecture.models.PhotosResponseState
 import com.volokhinaleksey.androidcleanarchitecture.ui.theme.AndroidCleanArchitectureTheme
 import com.volokhinaleksey.androidcleanarchitecture.viewmodels.MainViewModel
 import org.koin.android.ext.android.inject
+
+private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
 
@@ -24,6 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.getLaunchCount()
+        mainViewModel.getPhotos(page = 1, perPage = 100)
         setContent {
             AndroidCleanArchitectureTheme {
                 // A surface container using the 'background' color from the theme
@@ -51,8 +55,22 @@ class MainActivity : ComponentActivity() {
                             Greeting(text = "You don't need to show the evaluation window")
                         }
                     }
+                    mainViewModel.photos.observeAsState().value?.let {
+                        renderPhotosState(state = it)
+                    }
                 }
             }
+        }
+    }
+
+    private fun renderPhotosState(state: PhotosResponseState) {
+        when (state) {
+            is PhotosResponseState.Error -> Log.e(TAG, state.message)
+            PhotosResponseState.Loading -> Log.d(TAG, "Loading...")
+            is PhotosResponseState.Success -> Log.d(
+                TAG,
+                "Response Success, Result - ${state.photos}"
+            )
         }
     }
 

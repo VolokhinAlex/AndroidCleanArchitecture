@@ -1,4 +1,4 @@
-package com.volokhinaleksey.androidcleanarchitecture.repositories
+package com.volokhinaleksey.androidcleanarchitecture.repositories.launch_count
 
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
 

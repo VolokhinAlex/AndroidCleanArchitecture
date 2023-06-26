@@ -1,10 +1,10 @@
 package com.volokhinaleksey.androidcleanarchitecture
 
 import com.google.common.truth.Truth.assertThat
-import com.volokhinaleksey.androidcleanarchitecture.interactors.LaunchCounterInteractor
-import com.volokhinaleksey.androidcleanarchitecture.interactors.LaunchCounterInteractorImpl
+import com.volokhinaleksey.androidcleanarchitecture.interactors.launch_count.LaunchCounterInteractor
+import com.volokhinaleksey.androidcleanarchitecture.interactors.launch_count.LaunchCounterInteractorImpl
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
-import com.volokhinaleksey.androidcleanarchitecture.repositories.LaunchCounterRepository
+import com.volokhinaleksey.androidcleanarchitecture.repositories.launch_count.LaunchCounterRepository
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

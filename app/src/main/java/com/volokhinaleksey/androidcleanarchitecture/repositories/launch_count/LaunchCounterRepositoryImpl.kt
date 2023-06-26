@@ -1,6 +1,6 @@
-package com.volokhinaleksey.androidcleanarchitecture.repositories
+package com.volokhinaleksey.androidcleanarchitecture.repositories.launch_count
 
-import com.volokhinaleksey.androidcleanarchitecture.datasource.LaunchCounterDataSource
+import com.volokhinaleksey.androidcleanarchitecture.datasource.launch_count.LaunchCounterDataSource
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
 
 class LaunchCounterRepositoryImpl(

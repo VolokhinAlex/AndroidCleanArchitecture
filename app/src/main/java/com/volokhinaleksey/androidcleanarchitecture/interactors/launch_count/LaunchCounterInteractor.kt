@@ -1,4 +1,4 @@
-package com.volokhinaleksey.androidcleanarchitecture.interactors
+package com.volokhinaleksey.androidcleanarchitecture.interactors.launch_count
 
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
 

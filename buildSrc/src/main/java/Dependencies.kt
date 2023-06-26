@@ -14,6 +14,11 @@ object Releases {
 }
 
 object Versions {
+    // Retrofit
+    const val retrofit = "2.9.0"
+    const val converterGson = "2.9.0"
+    const val loggingOkHttp = "4.9.3"
+
     // Android Ktx
     const val ktxCore = "1.9.0"
 
@@ -45,6 +50,12 @@ object Versions {
     const val mockito = "5.2.0"
     const val mockitoInline = "5.2.0"
     const val kotlinMockito = "4.1.0"
+}
+
+object Retrofit {
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.converterGson}"
+    const val loggingOkHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingOkHttp}"
 }
 
 object Android {
