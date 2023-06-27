@@ -37,6 +37,8 @@ interface PhotoApiService {
     @GET("search/photos")
     suspend fun searchPhoto(
         @Header("Authorization") token: String,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
     ): SearchPhotosDTO
 }

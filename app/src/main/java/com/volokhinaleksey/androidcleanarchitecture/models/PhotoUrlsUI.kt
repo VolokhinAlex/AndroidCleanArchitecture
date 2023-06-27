@@ -1,5 +1,8 @@
 package com.volokhinaleksey.androidcleanarchitecture.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 /**
  *
  * An object for storing links to a photo of various sizes and of various quality
@@ -12,10 +15,11 @@ package com.volokhinaleksey.androidcleanarchitecture.models
  *
  */
 
+@Parcelize
 data class PhotoUrlsUI(
     val raw: String = "",
     val full: String = "",
     val regular: String = "",
     val small: String = "",
     val thumb: String = "",
-)
+) : Parcelable

@@ -35,6 +35,8 @@ object Versions {
     const val composeBom = "2022.12.00"
     const val composeViewModel = "2.5.1"
     const val composeMaterial3 = "1.1.0-alpha06"
+    const val pagingCompose = "1.0.0-alpha18"
+    const val composeNavigation = "2.5.3"
 
     // Koin
     const val koinCore = "3.3.3"
@@ -54,6 +56,15 @@ object Versions {
 
     // Coil
     const val coilCompose = "2.2.2"
+
+    // Paging 3
+    const val pagingRuntime = "3.1.1"
+    const val pagingCommon = "3.1.1"
+}
+
+object Paging {
+    const val pagingRuntime = "androidx.paging:paging-runtime-ktx:${Versions.pagingRuntime}"
+    const val pagingCommon = "androidx.paging:paging-common-ktx:${Versions.pagingCommon}"
 }
 
 object Retrofit {
@@ -84,6 +95,9 @@ object Compose {
     const val composeViewModel =
         "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModel}"
     const val composeLiveData = "androidx.compose.runtime:runtime-livedata"
+    const val composePaging = "androidx.paging:paging-compose:${Versions.pagingCompose}"
+    const val composeNavigation =
+        "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
 }
 
 object Tests {

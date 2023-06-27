@@ -10,6 +10,6 @@ interface SearchDataSource {
      * @param query - The request for which you need to find a photo
      */
 
-    suspend fun searchPhoto(token: String, query: String): SearchPhotosDTO
+    suspend fun searchPhoto(token: String, query: String, page: Int, perPage: Int): SearchPhotosDTO
 
 }

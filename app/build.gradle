@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -52,6 +53,10 @@ android {
 }
 
 dependencies {
+    // Paging
+    implementation Paging.pagingCommon
+    implementation Paging.pagingRuntime
+
     // Coil
     implementation Coil.coilCompose
 
@@ -79,6 +84,8 @@ dependencies {
     implementation Compose.composeMaterial
     implementation Compose.composeViewModel
     implementation Compose.composeLiveData
+    implementation Compose.composePaging
+    implementation Compose.composeNavigation
 
     // Tests
     testImplementation Koin.koinTest

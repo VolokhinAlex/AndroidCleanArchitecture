@@ -13,8 +13,17 @@ class SearchDataSourceImpl(
      * @param query - The request for which you need to find a photo
      */
 
-    override suspend fun searchPhoto(token: String, query: String): SearchPhotosDTO {
-        return apiHolder.photosApiService.searchPhoto(token = token, query = query)
+    override suspend fun searchPhoto(
+        token: String,
+        query: String,
+        page: Int,
+        perPage: Int
+    ): SearchPhotosDTO {
+        return apiHolder.photosApiService.searchPhoto(
+            token = token, query = query,
+            page = page,
+            perPage = perPage
+        )
     }
 
 }

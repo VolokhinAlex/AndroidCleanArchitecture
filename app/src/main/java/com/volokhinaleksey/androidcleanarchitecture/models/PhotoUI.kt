@@ -1,5 +1,8 @@
 package com.volokhinaleksey.androidcleanarchitecture.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 /**
  *
  * Object for storing photo data for UI
@@ -16,6 +19,7 @@ package com.volokhinaleksey.androidcleanarchitecture.models
  *
  */
 
+@Parcelize
 data class PhotoUI(
     val id: String = "",
     val createdAt: String = "",
@@ -26,4 +30,4 @@ data class PhotoUI(
     val description: String = "",
     val urls: PhotoUrlsUI = PhotoUrlsUI(),
     val likes: Long = 0L,
-)
+): Parcelable
