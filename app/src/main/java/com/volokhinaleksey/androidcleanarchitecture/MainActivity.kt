@@ -1,85 +1,73 @@
 package com.volokhinaleksey.androidcleanarchitecture
 
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.volokhinaleksey.androidcleanarchitecture.models.DataLaunchCount
-import com.volokhinaleksey.androidcleanarchitecture.models.PhotosResponseState
+import com.volokhinaleksey.androidcleanarchitecture.models.PhotoUI
+import com.volokhinaleksey.androidcleanarchitecture.ui.DetailsScreen
+import com.volokhinaleksey.androidcleanarchitecture.ui.PhotosScreen
+import com.volokhinaleksey.androidcleanarchitecture.ui.navigation.ScreenState
 import com.volokhinaleksey.androidcleanarchitecture.ui.theme.AndroidCleanArchitectureTheme
 import com.volokhinaleksey.androidcleanarchitecture.viewmodels.MainViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val TAG = "MainActivity"
+const val TAG = "MainActivity"
+const val PHOTO_DATA_KEY = "photo_data_key"
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by inject()
+    private val mainViewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.getLaunchCount()
-        mainViewModel.getPhotos(page = 1, perPage = 100)
         setContent {
             AndroidCleanArchitectureTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    mainViewModel.data.observeAsState().value?.let {
-                        Log.e("launchCount", it.launchCount.toString())
+                val navController = rememberNavController()
+                mainViewModel.data.observeAsState().value?.let {
+                    Log.e("launchCount", it.launchCount.toString())
+                    LaunchedEffect(key1 = true) {
+                        mainViewModel.isShowingEvaluationWindow(it.launchCount)
+                    }
+                    if (savedInstanceState == null) {
                         LaunchedEffect(key1 = true) {
-                            mainViewModel.isShowingEvaluationWindow(it.launchCount)
-                        }
-                        if (savedInstanceState == null) {
-                            LaunchedEffect(key1 = true) {
-                                val count = it.launchCount + 1
-                                mainViewModel.saveLaunchCount(count = DataLaunchCount(count))
-                            }
+                            val count = it.launchCount + 1
+                            mainViewModel.saveLaunchCount(count = DataLaunchCount(count))
                         }
                     }
-
-                    mainViewModel.isShowingEvaluationWindow.observeAsState().value?.let {
-                        if (it) {
-                            Greeting(text = "You need to display the application evaluation window")
-                        } else {
-                            Greeting(text = "You don't need to show the evaluation window")
-                        }
+                }
+                NavHost(
+                    navController = navController,
+                    startDestination = ScreenState.PhotosScreen.route,
+                )  {
+                    composable(route = ScreenState.PhotosScreen.route) {
+                        PhotosScreen(navController = navController)
                     }
-                    mainViewModel.photos.observeAsState().value?.let {
-                        renderPhotosState(state = it)
+                    composable(route = ScreenState.DetailsScreen.route) {
+                        val photoData = it.arguments?.parcelable<PhotoUI>(PHOTO_DATA_KEY)
+                        photoData?.let { data ->
+                            DetailsScreen(
+                                photoUI = data
+                            )
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun renderPhotosState(state: PhotosResponseState) {
-        when (state) {
-            is PhotosResponseState.Error -> Log.e(TAG, state.message)
-            PhotosResponseState.Loading -> Log.d(TAG, "Loading...")
-            is PhotosResponseState.Success -> Log.d(
-                TAG,
-                "Response Success, Result - ${state.photos}"
-            )
-        }
-    }
-
 }
 
-@Composable
-fun Greeting(text: String) {
-    Text(
-        text = text,
-        modifier = Modifier
-    )
+inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
+    SDK_INT >= 33 -> getParcelable(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelable(key) as? T
 }

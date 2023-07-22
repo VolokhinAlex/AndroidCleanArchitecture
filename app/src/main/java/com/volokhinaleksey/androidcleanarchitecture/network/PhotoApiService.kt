@@ -1,6 +1,7 @@
 package com.volokhinaleksey.androidcleanarchitecture.network
 
 import com.volokhinaleksey.androidcleanarchitecture.models.PhotoDTO
+import com.volokhinaleksey.androidcleanarchitecture.models.SearchPhotosDTO
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -27,4 +28,17 @@ interface PhotoApiService {
         @Query("order_by") orderBy: String
     ): List<PhotoDTO>
 
+    /**
+     * Method for getting photos using search
+     * @param token - Key for authorization on the server
+     * @param query - The request for which you need to find photos.
+     */
+
+    @GET("search/photos")
+    suspend fun searchPhoto(
+        @Header("Authorization") token: String,
+        @Query("query") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): SearchPhotosDTO
 }
